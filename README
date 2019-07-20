@@ -3,14 +3,15 @@ datetime, geoip2, requests.
 
 install with "pip install datetime geoip2 requests"
 
-You should be able to run this python code simply by CD'ing into the Netscout directory and 
-executing: ./fps_check.py 
+You should be able to run this python code simply by CD'ing into the netscout 
+directory and executing: ./fps_check.py 
 
-It's written in python 2.7.14 and makes use of my Mac's configured python in it's environment (which is 2.7.14)
+It's written in python 2.7.14 and makes use of my Mac's configured python in 
+its environment (which is 2.7.14)
 
 Thoughts on needed improvements:
 
-1. Separate stream receiver and 30 second periodic function into separate threads
+1. Separate stream receiver and 30second periodic function into separate threads
 2. Add logic for better history vs. previous period's flow totals
 3. Add more comments
 4. Add unittests
