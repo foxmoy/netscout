@@ -26,8 +26,18 @@ signal.signal(signal.SIGABRT, _shutdown)
 # ^C shuts down
 signal.signal(signal.SIGINT, _shutdown)
 
-stream_request = requests.get('http://54.190.154.136:8080/fps', stream=True)
-db_reader = geoip2.database.Reader('./GeoLite2-Country_20190430/GeoLite2-Country.mmdb')
+try:
+    stream_request = requests.get('http://54.190.154.136:8080/fps', stream=True)
+except Exception as e:
+    print "Error connecting to http://54.190.154.136:8080/fps"
+    sys.exit(1)
+
+try:
+    db_reader = geoip2.database.Reader('./GeoLite2-Country_20190430/GeoLite2-Country.mmdb')
+except Exception as e:
+    print "GeoLite2 DB is not readable"
+    sys.exit(2)
+
 country_fps_current = {}
 country_fps_prev = {}
 last_30_secs_flows = []
