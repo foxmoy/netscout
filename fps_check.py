@@ -28,7 +28,7 @@ signal.signal(signal.SIGINT, _shutdown)
 
 try:
     stream_request = requests.get('http://54.190.154.136:8080/fps', stream=True)
-except Exception as e:
+except requests.exceptions.RequestException as e:
     print "Error connecting to http://54.190.154.136:8080/fps"
     sys.exit(1)
 
