@@ -61,8 +61,8 @@ def print_anomalies_every_30s():
         # These +50% and -34% thresholds seemed reasonable for just barely detecting anomalies
         # Could be improved with more complicated lookbacks, looking back farther than the
         # previus 30s period.
-        if (float(country_fps_current[src_country]) / country_fps_prev[src_country] > 1.5) or \
-                (float(country_fps_current[src_country]) / country_fps_prev[src_country] < 0.66):
+        if (float(country_fps_current[src_country]) / country_fps_prev[src_country] > 1.2) or \
+                (float(country_fps_current[src_country]) / country_fps_prev[src_country] < 0.80):
             print "Country: %s" % src_country
 
         # Perhaps print out or act on individual netflows contained in last_30_sec_flows?
