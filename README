@@ -1,7 +1,7 @@
 required python2 pip dependencies:
-geoip2, requests.
+datetime, geoip2, requests.
 
-install with "pip install geoip2 requests"
+install with "pip install datetime geoip2 requests"
 
 You should be able to run this python code simply by CD'ing into the Netscout directory and 
 executing: ./fps_check.py 
@@ -12,5 +12,5 @@ Thoughts on needed improvements:
 
 1. Separate stream receiver and 30 second periodic function into separate threads
 2. Add logic for better history vs. previous period's flow totals
-3. Add a lot more comments
+3. Add more comments
 4. Add unittests
