@@ -65,7 +65,9 @@ def print_anomalies_every_30s():
                 (float(country_fps_current[src_country]) / country_fps_prev[src_country] < 0.80):
             print "Country: %s" % src_country
 
-        # Perhaps print out or act on individual netflows contained in last_30_sec_flows?
+            for flow in last_30_secs_flows:
+                if flow["src_country"] == src_country:
+                    print flow
 
     # store current for reference during next 30 second call of this method.
     country_fps_prev = country_fps_current
@@ -115,3 +117,5 @@ for line in stream_request.iter_lines():
     if (current_time - start_time > 30):
         print_anomalies_every_30s()
         start_time = 0
+        # Let garbage collect del the previous 30s list 
+        last_30_secs_flows = []
