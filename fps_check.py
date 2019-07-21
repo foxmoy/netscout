@@ -5,6 +5,7 @@ import datetime
 import geoip2.database
 import requests
 
+from optparse import OptionParser
 import json
 import signal
 import sys
@@ -25,6 +26,15 @@ signal.signal(signal.SIGTERM, _shutdown)
 signal.signal(signal.SIGABRT, _shutdown)
 # ^C shuts down
 signal.signal(signal.SIGINT, _shutdown)
+
+# Set up program options
+parser = OptionParser()
+parser.add_option("-s", "--streams",
+                  action="store_true", dest="streams", default=False,
+                  help="also print out streams for anomalies")
+
+# capture command line options
+(options, args) = parser.parse_args()
 
 try:
     stream_request = requests.get('http://54.190.154.136:8080/fps', stream=True)
@@ -65,9 +75,11 @@ def print_anomalies_every_30s():
                 (float(country_fps_current[src_country]) / country_fps_prev[src_country] < 0.80):
             print "Country: %s" % src_country
 
-            for flow in last_30_secs_flows:
-                if flow["src_country"] == src_country:
-                    print flow
+            # only print out streams if -s or --stream options was applied to program
+            if options.streams:
+                for flow in last_30_secs_flows:
+                    if flow["src_country"] == src_country:
+                        print flow
 
     # store current for reference during next 30 second call of this method.
     country_fps_prev = country_fps_current
